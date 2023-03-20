@@ -29,7 +29,21 @@ Command: git status -s`,
 		status, err := wt.Status()
 		exitIfError(err)
 
-		fmt.Printf("%v", status)
+		if status.IsClean() {
+			fmt.Printf("%s All clean! \U0001FAE7\n", Blue)
+			return
+		}
+
+		for path, change := range status {
+
+			switch change.Staging {
+			case git.Renamed:
+				fmt.Printf("%s%s -> %s\n", Purple, path, change.Extra)
+			default:
+				fmt.Printf("%s%c%s%c%s - %s\n", Green, change.Staging, Red, change.Worktree, White, path)
+			}
+		}
+
 	},
 }
 
