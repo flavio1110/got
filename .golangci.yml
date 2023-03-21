@@ -1,0 +1,11 @@
+---
+run:
+  timeout: 3m
+  go: '1.20'
+
+linters:
+  enable:
+    - misspell
+    - goimports
+    - revive
+    - godot

@@ -10,7 +10,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// statCmd represents the stat command
+// statCmd represents the stat command.
 var statCmd = &cobra.Command{
 	Use:   "stat",
 	Short: "Get the summarized status of the local repo.",

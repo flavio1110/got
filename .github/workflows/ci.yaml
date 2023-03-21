@@ -1,0 +1,45 @@
+---
+name: CI
+
+on:
+  push:
+    paths:
+      - *
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ludeeus/action-shellcheck@master
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v2
+        with:
+          version: latest
+
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+        with:
+          go-version: 1.20
+      - run: go test ./...
+
+  build:
+    needs: [lint, unit-tests]
+    name: Build
+    runs-on: ubuntu-latest
+    outputs:
+      version-tag: ${{ steps.version.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v2
+      - id: version
+        run: echo "::set-output name=tag::${GITHUB_REF_NAME/\//-}-$(git rev-parse --short HEAD)"
+      - uses: actions/setup-go@v2
+        with:
+          go-version: 1.20
+      - name: Compile and build
+        run: GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o ./bin/got
