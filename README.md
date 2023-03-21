@@ -11,10 +11,6 @@ e.g.
 ```shell
 alias push='git push origin head'
 alias stat='git status -s'
-alias nb='git checkout -b'
-alias goto='git checkout'
-alias reset='git reset --hard'
-alias ci='git commit -am'
 alias gbr="git branch | grep -v "main" | xargs git branch -D"
 ```
 
