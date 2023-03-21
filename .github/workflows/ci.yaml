@@ -1,10 +1,7 @@
 ---
 name: CI
 
-on:
-  push:
-    paths:
-      - *
+on: push
 
 jobs:
   lint:
@@ -22,10 +19,10 @@ jobs:
     name: Unit Tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-go@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v4
         with:
-          go-version: 1.20
+          go-version: '1.20'
       - run: go test ./...
 
   build:
@@ -35,11 +32,9 @@ jobs:
     outputs:
       version-tag: ${{ steps.version.outputs.tag }}
     steps:
-      - uses: actions/checkout@v2
-      - id: version
-        run: echo "::set-output name=tag::${GITHUB_REF_NAME/\//-}-$(git rev-parse --short HEAD)"
-      - uses: actions/setup-go@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v4
         with:
-          go-version: 1.20
+          go-version: '1.20'
       - name: Compile and build
         run: GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o ./bin/got
