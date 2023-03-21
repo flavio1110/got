@@ -1,3 +1,4 @@
+[![.github/workflows/ci.yaml](https://github.com/flavio1110/got/actions/workflows/ci.yaml/badge.svg)](https://github.com/flavio1110/got/actions/workflows/ci.yaml)
 # got
 ![got](got.png)
 
