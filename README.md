@@ -29,3 +29,15 @@ I'm adding the commands as I have some free time. So far, the following commands
 | got stat | git status -s | get a summary of the status of the local repo |
 
 
+
+
+### Scaffold a  new command
+1 - Install the Cobra CLI Generator
+More info <https://github.com/spf13/cobra-cli/blob/main/README.md>
+```
+ go install github.com/spf13/cobra-cli@latest
+```
+2 - Add the command
+```
+cobra-cli add [name] --author "Flavio Silva flavio1110@gmaill.com"
+```

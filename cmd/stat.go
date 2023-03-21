@@ -1,5 +1,5 @@
 /*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
+Copyright © 2023 Flavio Silva flavio1110@gmail.com
 */
 package cmd
 
@@ -10,7 +10,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// statCmd represents the stat command.
 var statCmd = &cobra.Command{
 	Use:   "stat",
 	Short: "Get the summarized status of the local repo.",
