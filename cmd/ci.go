@@ -11,7 +11,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// ciCmd represents the ci command
+// ciCmd represents the ci command.
 var ciCmd = &cobra.Command{
 	Use:   "ci",
 	Short: "Stage all modifications and commit them with the provided message",
