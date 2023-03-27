@@ -11,7 +11,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// pushCmd represents the push command
+// pushCmd represents the push command.
 var pushCmd = &cobra.Command{
 	Use:   "push",
 	Short: "Push the current head to the remote",
@@ -37,7 +37,7 @@ got push`,
 		ref, err := repo.Head()
 		exitIfError(err)
 
-		fmt.Println("Changes pushed with success to origin/%s", ref.Name())
+		fmt.Printf("Changes pushed with success to %s\n", ref.Name())
 	},
 }
 
