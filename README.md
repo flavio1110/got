@@ -16,6 +16,13 @@ alias gbr="git branch | grep -v "main" | xargs git branch -D"
 
 Having it as shell script is fine, but inspired by [gut](https://github.com/gut-hub/gut), I decided to port my script to a CLI application
 
+## Install
+
+```
+go install github.com/flavio1110/got
+```
+
+
 ## What commands are available?
 
 I'm adding the commands as I have some free time. So far, the following commands are available:
