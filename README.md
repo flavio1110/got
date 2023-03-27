@@ -20,12 +20,13 @@ Having it as shell script is fine, but inspired by [gut](https://github.com/gut-
 
 I'm adding the commands as I have some free time. So far, the following commands are available:
 
-| got         | git                  | description                                                  |
-|-------------|----------------------|--------------------------------------------------------------|
-| got stat    | git status -s        | Get a summary of the status of the local repo                |
-| got rmb     | ...                  | Remove all branches except main, master, and the current one |
-| got nb name | git checkout -b name | Create a new branch and switch to it                         |
-| got push    | git push origin head | Push the current head to the remote origin                   |
+| got            | git                                    | description                                                       |
+|----------------|----------------------------------------|-------------------------------------------------------------------|
+| got stat       | git status -s                          | Get a summary of the status of the local repo                     |
+| got rmb        | ...                                    | Remove all branches except main, master, and the current one      |
+| got nb name    | git checkout -b name                   | Create a new branch and switch to it                              |
+| got push       | git push origin head                   | Push the current head to the remote origin                        |
+| got ci message | git add --all && git commit -m message | Stage all modifications and commit them with the provided message |
 
 
 ### Scaffold a  new command
