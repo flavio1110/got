@@ -17,7 +17,9 @@ var pushCmd = &cobra.Command{
 	Short: "Push the current head to the remote",
 	Long: `Push the current head to the remote origin. For example:
 
-got push`,
+got push 
+or
+got push f `,
 	Run: func(cmd *cobra.Command, args []string) {
 		path := getWorkDir()
 
