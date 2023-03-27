@@ -4,7 +4,10 @@ Copyright © 2023 Flavio Silva flavio1110@gmaill.com
 package cmd
 
 import (
+	"fmt"
+
 	"github.com/go-git/go-git/v5"
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )
 
@@ -24,19 +27,20 @@ got push`,
 		err = repo.Push(&git.PushOptions{
 			RemoteName: "origin",
 		})
+		if err != nil {
+			if errors.Is(err, git.NoErrAlreadyUpToDate) {
+				fmt.Println("Nothing to push. Remote is already up to date!")
+				return
+			}
+			exitIfError(err)
+		}
+		ref, err := repo.Head()
+		exitIfError(err)
+
+		fmt.Println("Changes pushed with success to origin/%s", ref.Name())
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(pushCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// pushCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// pushCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
