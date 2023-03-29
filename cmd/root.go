@@ -17,31 +17,30 @@ package cmd
 
 import (
 	"os"
+	"os/exec"
 
 	"github.com/spf13/cobra"
 )
 
+var args []string
 var rootCmd = &cobra.Command{
-	Use:   "got",
-	Short: "got is a CLI used to simplify some git comands",
-	Long:  `got is a CLI used to simplify some git comands, and make your life easier.`,
+	Use:                "got",
+	Short:              "got is a CLI used to simplify some git comands",
+	Long:               `got is a CLI used to simplify some git comands, and make your life easier.`,
+	DisableSuggestions: true,
+	SilenceErrors:      true,
 }
 
 func Execute() {
 	err := rootCmd.Execute()
 	if err != nil {
-		os.Exit(1)
+		fallbackToGit()
 	}
 }
 
-func init() {
-	// Here you will define your flags and configuration settings.
-	// Cobra supports persistent flags, which, if defined here,
-	// will be global for your application.
-
-	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.got.yaml)")
-
-	// Cobra also supports local flags, which will only run
-	// when this action is called directly.
-	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+func fallbackToGit() {
+	cmd := exec.Command("git", os.Args[1:]...)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stdout
+	_ = cmd.Run()
 }

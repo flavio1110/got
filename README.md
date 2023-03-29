@@ -2,7 +2,8 @@
 # got
 ![got](got.png)
 
-A CLI written in GO for with some shortcuts for Git that I use daily.
+A CLI written in GO to extend the `git` cli adding some shortcuts and useful functions.
+All regular commands used with `git` will work with `got`.
 
 ## Motivation
 
@@ -22,10 +23,9 @@ Having it as shell script is fine, but inspired by [gut](https://github.com/gut-
 go install github.com/flavio1110/got
 ```
 
-
 ## What commands are available?
 
-I'm adding the commands as I have some free time. So far, the following commands are available:
+All commands from `git ` CLI, and:
 
 | got            | git                                    | description                                                       |
 |----------------|----------------------------------------|-------------------------------------------------------------------|
@@ -35,6 +35,7 @@ I'm adding the commands as I have some free time. So far, the following commands
 | got push       | git push origin head                   | Push the current head to the remote origin                        |
 | got ci message | git add --all && git commit -m message | Stage all modifications and commit them with the provided message |
 
+I'm adding the commands as I have some free time. So far, the following commands are available:
 
 ### Scaffold a  new command
 1 - Install the Cobra CLI Generator
