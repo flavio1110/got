@@ -22,7 +22,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var args []string
 var rootCmd = &cobra.Command{
 	Use:                "got",
 	Short:              "got is a CLI used to simplify some git comands",
