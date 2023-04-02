@@ -16,30 +16,44 @@ limitations under the License.
 package cmd
 
 import (
+	"fmt"
 	"os"
 	"os/exec"
 
 	"github.com/spf13/cobra"
 )
 
-var rootCmd = &cobra.Command{
-	Use:                "got",
-	Short:              "got is a CLI used to simplify some git comands",
-	Long:               `got is a CLI used to simplify some git comands, and make your life easier.`,
-	DisableSuggestions: true,
-	SilenceErrors:      true,
-}
+var rootCmd = newRootCmd()
 
-func Execute() {
-	err := rootCmd.Execute()
-	if err != nil {
-		fallbackToGit()
+func newRootCmd() *cobra.Command {
+	return &cobra.Command{
+		Use:                "got",
+		Short:              "got is a CLI used to simplify some git commands",
+		Long:               `got is a CLI used to simplify some git commands, and make your life easier.`,
+		DisableSuggestions: true,
+		SilenceErrors:      true,
 	}
 }
 
-func fallbackToGit() {
-	cmd := exec.Command("git", os.Args[1:]...)
+func execute(cmd *cobra.Command, args ...string) error {
+	err := cmd.Execute()
+	if err != nil {
+		if err := fallbackToGit(args...); err != nil {
+			return fmt.Errorf("failed to execute command with git: %w", err)
+		}
+	}
+
+	return nil
+}
+
+func Execute() {
+	_ = execute(rootCmd, os.Args[1:]...)
+	// error is written to stdout.
+}
+
+func fallbackToGit(args ...string) error {
+	cmd := exec.Command("git", args...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stdout
-	_ = cmd.Run()
+	return cmd.Run()
 }
